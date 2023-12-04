@@ -55,5 +55,4 @@ plt.xlabel('Year')
 plt.ylabel('Pollution Value')
 plt.legend()
 
-
 plt.show()
