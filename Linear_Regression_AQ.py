@@ -21,13 +21,24 @@ print(model.summary())
 future_years = pd.DataFrame({
     'Year': range(2023, 2051),
     'PPM_uom': np.random.rand(28),  
-    'Pollutant': np.random.choice(['pm25', 'pm10', 'so2', 'o3', 'no2'], 28),
+    'Pollutant': np.random.choice(['pm25', 'o3'], 28),
     'Country' : np.random.choice(['US', 'CA'], 28)
 })
 
 predicted_values = model.predict(future_years)
 future_years['Predicted_Value_Of_Pollutant'] = predicted_values
-print(future_years)
+
+# Print tables for 'pm25' including 'US' and 'CA'
+pm25_table = future_years[(future_years['Pollutant'] == 'pm25') & ((future_years['Country'] == 'US') | (future_years['Country'] == 'CA'))]
+print("\nTable for pm25 (US and CA):\n")
+print(pm25_table[['Year', 'Country', 'PPM_uom', 'Predicted_Value_Of_Pollutant']])
+
+# Print tables for 'o3' including 'US' and 'CA'
+o3_table = future_years[(future_years['Pollutant'] == 'o3') & ((future_years['Country'] == 'US') | (future_years['Country'] == 'CA'))]
+print("\nTable for o3 (US and CA):\n")
+print(o3_table[['Year', 'Country', 'PPM_uom', 'Predicted_Value_Of_Pollutant']])
+
+# print(future_years)
 
 # Data visualization
 plt.figure(figsize=(10, 6))
