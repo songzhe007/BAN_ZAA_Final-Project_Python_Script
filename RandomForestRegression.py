@@ -3,11 +3,10 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
-
-
 
 
 file_path = '/kaggle/input/spotify-songs/spotify_songs.csv'
@@ -44,8 +43,9 @@ print(f'Mean Squared Error on Test Data: {mse}')
 r2 = r2_score(y_test, y_pred)
 print(f'R-squared: {r2}')
 
-# feature_importances = model.feature_importances_
-# print(f'Importance: {feature_importances}')
+feature_importances = model.feature_importances_
+for feature, importance in zip(features, feature_importances):
+    print(f'Feature {feature}: Importance = {importance}')
 
 
 sample_indices = np.random.choice(len(y_test), 100, replace=False)
